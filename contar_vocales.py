@@ -2,6 +2,8 @@ import unittest
 
 def contar_vocales(mystring):
     resultado = {}
+    vocales = ("a","e","i","o","u")
+
     mystring = mystring.lower()
     mystring = mystring.replace("á","a")
     mystring = mystring.replace("é","e")
@@ -9,9 +11,9 @@ def contar_vocales(mystring):
     mystring = mystring.replace("ó","o")
     mystring = mystring.replace("ú","u")
     mystring = mystring.replace(" ","")  
+   
     for letra in mystring:
-
-        if letra in "aeiou":
+        if letra in vocales:
             if letra not in resultado:
                 resultado[letra]=0
             resultado[letra] +=1    
@@ -28,24 +30,28 @@ class TestContarVocales(unittest.TestCase):
         resultado= contar_vocales("cas")
         self.assertEqual(resultado,{"a":1})
 
+    def test_contar_auto(self):
+        resultado= contar_vocales("aUtO")
+        self.assertEqual(resultado,{"a":1,"u":1,"o":1})
+
     def test_contar_aa(self):
-        resultado= contar_vocales("casa")
+        resultado= contar_vocales("caSA")
         self.assertEqual(resultado,{"a":2})
 
     def test_contar_bese(self):
-        resultado= contar_vocales("bese")
+        resultado= contar_vocales("BeSe")
         self.assertEqual(resultado,{"e":2})
 
     def test_contar_besa(self):
-        resultado= contar_vocales("besa")
+        resultado= contar_vocales("be s A")
         self.assertEqual(resultado,{"a":1,"e":1})       
 
     def test_Aérea(self):
-        resultado= contar_vocales('Aérea')
+        resultado= contar_vocales('AÉrea')
         self.assertEqual(resultado, {"a":2,"e":2})
 
     def test_neUquén(self):
-        resultado= contar_vocales('neUquén')
+        resultado= contar_vocales('neUquÉn')
         self.assertEqual(resultado, {"e":2,"u":2})    
 
     def test_Riachuelo(self):
@@ -53,8 +59,9 @@ class TestContarVocales(unittest.TestCase):
         self.assertEqual(resultado, {"a":1,"e":1, "i":1,"o":1, "u":1})        
 
     def test_Murciélago(self):
-        resultado= contar_vocales('Murciélago')
+        resultado= contar_vocales('MurciÉlago')
         self.assertEqual(resultado, {"a":1,"e":1, "i":1,"o":1, "u":1}) 
+
 
 unittest.main()
 
